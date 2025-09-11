@@ -1,7 +1,7 @@
 import csv
 path_arquivo = "vendas.csv"
 
-print("Iniciando ETL...")
+# print("Iniciando ETL...")
 
 def ler_csv(nome_do_Arquivo_csv: str) -> list[dict]:
     """
@@ -34,11 +34,11 @@ def somar_valores_dos_produtos(lista_com_produtos_filtrados: list[dict]) -> int:
         valor_total += int(produto.get("preco"))
     return valor_total
 
-lista_de_produtos = ler_csv(path_arquivo)
-produtos_entregues = filtrar_produtos_nao_entregues(lista_de_produtos)
-print(produtos_entregues)
-valor_dos_produtos_entregues = somar_valores_dos_produtos(produtos_entregues)
-print(valor_dos_produtos_entregues)
+# lista_de_produtos = ler_csv(path_arquivo)
+# produtos_entregues = filtrar_produtos_nao_entregues(lista_de_produtos)
+# print(produtos_entregues)
+# valor_dos_produtos_entregues = somar_valores_dos_produtos(produtos_entregues)
+# print(valor_dos_produtos_entregues)
 
 
 ##valor_dos_produtos_entregues = somar_valores_dos_produtos(produtos_entregues)
