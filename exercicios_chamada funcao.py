@@ -3,7 +3,7 @@
 from exercicios_type_hint import ler_csv, calcular_media_dos_valores
 import csv
 
-path_arquivo = "vendas.csv"
+#path_arquivo = "vendas.csv"
 
 lista_de_produtos = ler_csv(path_arquivo)
 

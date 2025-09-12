@@ -4,18 +4,38 @@ from pydantic import BaseModel, field_validator, ValidationError
 from typing import List, Dict, Optional
 import csv
 
-#####LER CSV
-def ler_csv(nome_do_Arquivo_csv: str) -> list[dict]:
-    """
-    Funcao que le um arquivo csv e retorna uma lista de
-    dicionarios"""
+class ItemVenda(BaseModel):
+    Produto: str
+    Categoria: str
+    Quantidade: int
+    Venda: int
 
-    lista = []
-    with open(nome_do_Arquivo_csv, mode="r", encoding='utf-8') as arquivo:
+    # Validador para garantir valores positivos
+    @field_validator('Quantidade', 'Venda')
+    def valores_positivos(cls, v):
+        assert v >= 0, 'deve ser positivo'
+        return v
+
+class CategoriaDados(BaseModel):
+    Categoria: str
+    Itens: List[ItemVenda]
+    TotalVendas: Optional[int] = 0
+
+
+#####LER CSV
+def ler_csv(nome_do_Arquivo_csv: str) -> List[ItemVenda]:
+    dados_validados = []
+    with open(nome_do_Arquivo_csv, mode='r', encoding='utf-8') as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            lista.append(linha)
-    return lista
+            try:
+                item = ItemVenda(**linha)
+                dados_validados.append(item)
+            except ValidationError as e:
+                print(f"Erro de validação: {e.json()}")
+    return dados_validados
+
+
 
 
 # 1-Calcular Média de Valores em uma Lista
