@@ -1,5 +1,6 @@
 # Exercícios
 # Vamos revisar funções adicionando type hints e Pydantic
+import csv
 
 # 1-Calcular Média de Valores em uma Lista
 
